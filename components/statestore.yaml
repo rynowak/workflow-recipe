@@ -1,0 +1,37 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+spec:
+  # See: https://docs.dapr.io/reference/components-reference/supported-state-stores/setup-postgresql-v1/
+  type: state.postgresql 
+  version: v1
+  metadata:
+    # Connection string
+    - name: connectionString
+      value: "host=localhost user=postgres password=daprrulz port=5432 connect_timeout=10 database=sample_state"
+    # Name of the table where to store the state (optional)
+    - name: tableName
+      value: "sample_state"
+    # Name of the table where to store metadata used by Dapr (optional)
+    - name: metadataTableName
+      value: "sample_metadata"
+    # Use as actor statestore
+    - name: actorStateStore
+      value: "true"
+
+    # Timeout for database operations, as a Go duration or number of seconds (optional)
+    #- name: timeout
+    #  value: 20
+    # Cleanup interval in seconds, to remove expired rows (optional)
+    #- name: cleanupInterval
+    #  value: "1h"
+    # Maximum number of connections pooled by this component (optional)
+    #- name: maxConns
+    #  value: 0
+    # Max idle time for connections before they're closed (optional)
+    #- name: connectionMaxIdleTime
+    #  value: 0
+    # Controls the default mode for executing queries. (optional)
+    #- name: queryExecMode
+    #  value: ""
